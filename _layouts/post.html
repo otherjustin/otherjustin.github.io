@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>otherjustin: {{ page.title }}</title>
+    {% include head.html %}
+    {% include google.html %}
+  </head>
+  <body>
+            <h2 class="entry-title">
+              <a href="{{ page.url }}" rel="bookmark">{{ page.title | escape }}</a>
+            </h2>
+              Posted by {{ page.author }}
+              <span class="published" title="{{ page.date | date_to_xml_schema }}">{{ page.date | date: "%B %-d, %Y @ %l:%M %P" }}</span>
+
+{{ content }}
+
+{% if page.categories.size > 0 %}
+              <span class="categories">Posted in
+{% for category in page.categories %}
+{% if forloop.last %}
+                <a href="/{{ category }}/" rel="category tag">{{ category | capitalize }}</a>
+{% else %}
+                <a href="{{ category }}" rel="category tag">{{ category | capitalize }}</a>,
+{% endif %}
+{% endfor %}
+              </span> |
+{% endif %}
+
+{% include footer.html %}
+  </body>
+</html>
